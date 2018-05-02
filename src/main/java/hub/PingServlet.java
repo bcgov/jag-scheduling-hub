@@ -10,6 +10,7 @@ public class PingServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType( "application/json" );
-        response.getWriter().print( "{\"alive\":true}" );
+        String version = System.getenv("OPENSHIFT_BUILD_COMMIT");
+        response.getWriter().print( "{\"version\":\"" + version + "\"}" );
     }
 }
