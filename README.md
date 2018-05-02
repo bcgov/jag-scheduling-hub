@@ -1,19 +1,7 @@
-# jag-efiling-hub
-Integration HUB for E-Filing
+openshift-jee-sample
+====================
 
-## Development
+A sample app to be deployed on openshift environments
 
-Prerequisites: Docker
-
-To get up and running developing, build the docker image:
-```bash
-$ setup.sh
-```
-
-Once setup has finished you can run docker container with:
-```bash
-$ dev.sh
-```
-
-This will run the container in the foreground with STDIN open and place you into root/karaf.
+Note: to build this repository with maven you must specify "-Popenshift", eg "mvn clean package -Popenshift"
 
