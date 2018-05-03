@@ -1,4 +1,10 @@
-to start the app locally
+to start the app locally, assuming a wildfly is running in the background
 
-`mvn jetty:run`
+`mvn clean wildfly:deploy -Popenshift`
+
+then access
+
+`http://localhost:8080/hub/ping`
+
+
 
