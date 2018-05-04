@@ -1,13 +1,17 @@
 To run locally:
 1. start wildfly with the following env variables or system properties set
+
   . COA_USER
   . COA_PASSWORD
   . COA_SEARCH_ENDPOINT
   . COA_NAMESPACE
   . COA_SEARCH_SOAP_ACTION
+  . COA_VIEW_CASE_PARTY_SOAP_ACTION
 
 something like
-`.../standalone.sh --server-config=standalone.xml -P .../cao.properties`
+```
+.../standalone.sh --server-config=standalone.xml -P .../cao.properties
+```
 
 2. start the app locally 
 

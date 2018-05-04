@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "SearchServlet", urlPatterns = {"/search"}, loadOnStartup = 1)
+@WebServlet(name = "SearchServlet", urlPatterns = {"/form7s"}, loadOnStartup = 1)
 public class SearchServlet extends HttpServlet {
 
     @Inject
@@ -30,8 +30,14 @@ public class SearchServlet extends HttpServlet {
         String result = producer.requestBody("direct:search", req.getParameter("caseNumber"), String.class);
         LOGGER.log(Level.INFO, result);
 
+        res.setHeader("content-type", "application/json");
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
+
+        if ("not-found".equalsIgnoreCase(result)) {
+            res.setHeader("content-type", "text/plain");
+            res.setStatus(404);
+        }
     }
 
 }

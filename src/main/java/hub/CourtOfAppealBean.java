@@ -34,8 +34,12 @@ public class CourtOfAppealBean {
         return getValue("COA_NAMESPACE");
     }
 
-    public String searchSoapAction() {
+    public String searchByCaseNumberSoapAction() {
         return getValue("COA_SEARCH_SOAP_ACTION");
+    }
+
+    public String viewCasePartySoapAction() {
+        return getValue("COA_VIEW_CASE_PARTY_SOAP_ACTION");
     }
 
     public String basicAuthorization() {
@@ -57,5 +61,28 @@ public class CourtOfAppealBean {
         message.saveChanges();
 
         return message;
+    }
+
+    public SOAPMessage viewCaseParty(String caseId) throws Exception {
+        MessageFactory myMsgFct = MessageFactory.newInstance();
+        SOAPMessage message = myMsgFct.createMessage();
+        SOAPPart mySPart = message.getSOAPPart();
+        SOAPEnvelope myEnvp = mySPart.getEnvelope();
+        SOAPBody body = myEnvp.getBody();
+        Name bodyName = myEnvp.createName("ViewCaseParty", "any", this.namespace());
+        SOAPBodyElement gltp = body.addBodyElement(bodyName);
+        Name myContent = myEnvp.createName("intCaseId", "any", this.namespace());
+        SOAPElement mySymbol = gltp.addChildElement(myContent);
+        mySymbol.addTextNode(caseId);
+        message.saveChanges();
+
+        return message;
+    }
+
+    public String extractCaseId(String body) {
+        int start = body.indexOf("<CaseId>");
+        int end = body.indexOf("</CaseId>");
+
+        return body.substring(start+8, end);
     }
 }
