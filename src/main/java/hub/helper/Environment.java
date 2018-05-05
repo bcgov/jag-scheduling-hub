@@ -1,13 +1,13 @@
 package hub.helper;
 
-import hub.CourtOfAppealBean;
+import hub.CsoSearch;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Environment {
 
-    private final static Logger LOGGER = Logger.getLogger(CourtOfAppealBean.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(CsoSearch.class.getName());
 
     public static String getValue(String key) {
         LOGGER.log(Level.INFO, "env."+key+"=" + System.getenv(key));

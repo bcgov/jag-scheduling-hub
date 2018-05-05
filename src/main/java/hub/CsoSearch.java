@@ -6,17 +6,10 @@ import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static hub.helper.Environment.getValue;
+
 @Named
-public class CourtOfAppealBean {
-
-    private final static Logger LOGGER = Logger.getLogger(CourtOfAppealBean.class.getName());
-
-    protected String getValue(String key) {
-        LOGGER.log(Level.INFO, "env."+key+"=" + System.getenv(key));
-        LOGGER.log(Level.INFO, "properties."+key+"=" + System.getProperty(key));
-
-        return System.getenv(key) != null ? System.getenv(key) : System.getProperty(key);
-    }
+public class CsoSearch {
 
     public String user() {
         return getValue("COA_USER");

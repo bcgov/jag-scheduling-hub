@@ -1,14 +1,15 @@
 package hub;
 
-import hub.support.Resource;
-import hub.support.RouteTest;
+import hub.http.PingServlet;
+import hub.support.HttpTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import static hub.support.Resource.bodyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PingTest extends RouteTest {
+public class PingTest extends HttpTest {
 
     @Before
     public void setCommitHash() {
@@ -20,6 +21,6 @@ public class PingTest extends RouteTest {
         context.addServlet(PingServlet.class, "/ping");
         server.start();
 
-        assertThat(Resource.withUrl("http://localhost:8888/ping"), equalTo("42isTheAnswer"));
+        assertThat(bodyOf("http://localhost:8888/ping"), equalTo("42isTheAnswer"));
     }
 }

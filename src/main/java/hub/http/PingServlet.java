@@ -1,4 +1,4 @@
-package hub;
+package hub.http;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
@@ -15,30 +15,22 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "SearchServlet", urlPatterns = {"/form7s"}, loadOnStartup = 1)
-public class SearchServlet extends HttpServlet {
+@WebServlet(name = "PingServlet", urlPatterns = {"/ping"}, loadOnStartup = 1)
+public class PingServlet extends HttpServlet {
 
     @Inject
     @ContextName("cdi-context")
     private CamelContext context;
 
-    private final static Logger LOGGER = Logger.getLogger(SearchServlet.class.getName());
+    private final static Logger LOGGER = Logger.getLogger(PingServlet.class.getName());
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         ProducerTemplate producer = context.createProducerTemplate();
-        String result = producer.requestBody("direct:search", req.getParameter("caseNumber"), String.class);
+        String result = producer.requestBody("direct:ping", null, String.class);
         LOGGER.log(Level.INFO, result);
 
-        res.setHeader("content-type", "application/json");
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
-
-        if ("not-found".equalsIgnoreCase(result)) {
-            res.setHeader("content-type", "text/plain");
-            res.setStatus(404);
-        }
     }
-
 }
-

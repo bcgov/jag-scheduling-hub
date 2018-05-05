@@ -5,7 +5,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.junit.After;
 import org.junit.Before;
 
-public class RouteTest {
+public class HttpTest {
 
     protected Server server;
     protected ServletContextHandler context;

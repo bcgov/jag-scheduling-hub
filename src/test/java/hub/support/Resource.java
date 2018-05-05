@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class Resource {
 
-    public static String withUrl(String uri) throws Exception {
+    public static String bodyOf(String uri) throws Exception {
         URL url = new URL( uri );
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         InputStream inputStream = connection.getInputStream();
