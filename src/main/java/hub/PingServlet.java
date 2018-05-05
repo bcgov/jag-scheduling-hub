@@ -33,6 +33,4 @@ public class PingServlet extends HttpServlet {
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
     }
-
 }
-

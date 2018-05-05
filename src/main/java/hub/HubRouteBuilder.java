@@ -29,7 +29,7 @@ public class HubRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() {
-        from("direct:ping").setBody(simple(pingBean.version()));
+        from("direct:ping").setBody(constant(pingBean.version()));
 
         XmlJsonDataFormat xmlJsonFormat = new XmlJsonDataFormat();
         xmlJsonFormat.setEncoding("UTF-8");

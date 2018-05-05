@@ -1,12 +1,14 @@
 package hub;
 
+import hub.helper.Environment;
+
 import javax.inject.Named;
 
 @Named
 public class PingBean {
 
     public String version() {
-        return System.getenv("OPENSHIFT_BUILD_COMMIT");
+        return Environment.getValue("OPENSHIFT_BUILD_COMMIT");
     }
 
 }
