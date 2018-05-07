@@ -23,9 +23,4 @@ public class HttpTest {
     public void stopServer() throws Exception {
         server.stop();
     }
-
-    @Before
-    public void setProperties() {
-        System.setProperty("COA_SEARCH_ENDPOINT", "http4://localhost:8111");
-    }
 }

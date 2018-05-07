@@ -38,7 +38,7 @@ public class SearchRouteBuilder extends RouteBuilder {
                     String caseNumber = exchange.getIn().getBody(String.class);
                     LOGGER.log(Level.INFO, "caseNumber="+caseNumber);
                     String message = stringify(csoSearch.searchByCaseNumber(caseNumber));
-
+                    LOGGER.log(Level.INFO, "message="+message);
                     exchange.getOut().setBody(message);
                 })
                 .setHeader(Exchange.HTTP_METHOD, constant("POST"))
@@ -77,7 +77,7 @@ public class SearchRouteBuilder extends RouteBuilder {
                     .otherwise()
                         .process(exchange -> LOGGER.log(Level.INFO, "not found..."))
                         .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(404))
-                        .setBody(constant("not-found"))
+                        .setBody(constant("NOT FOUND"))
         ;
     }
 }
