@@ -11,7 +11,7 @@ public class HttpTest {
     protected ServletContextHandler context;
 
     @Before
-    public void aJettyServer() throws Exception {
+    public void startHub() throws Exception {
         server = new Server(8888);
         context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
@@ -20,7 +20,12 @@ public class HttpTest {
         server.setHandler(context);
     }
     @After
-    public void stopServer() throws Exception {
+    public void stopHub() throws Exception {
         server.stop();
+    }
+    @Before
+    public void setDefaultProperties() {
+        System.setProperty("COA_NAMESPACE", "http://hub.org");
+        System.setProperty("COA_SEARCH_ENDPOINT", "http4://localhost:8111");
     }
 }
