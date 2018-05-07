@@ -1,19 +1,33 @@
-# jag-efiling-hub
-Integration HUB for E-Filing
+[![Build Status](https://travis-ci.org/bcgov/jag-efiling-hub.svg?branch=master)](https://travis-ci.org/bcgov/jag-efiling-hub)
 
-## Development
+To run locally:
+1. start wildfly with the following env variables or system properties set
 
-Prerequisites: Docker
+  * COA_USER
+  * COA_PASSWORD
+  * COA_SEARCH_ENDPOINT
+  * COA_NAMESPACE
+  * COA_SEARCH_SOAP_ACTION
+  * COA_VIEW_CASE_PARTY_SOAP_ACTION
 
-To get up and running developing, build the docker image:
-```bash
-$ setup.sh
+something like
+```
+.../standalone.sh --server-config=standalone.xml -P .../cao.properties
 ```
 
-Once setup has finished you can run docker container with:
-```bash
-$ dev.sh
+2. start the app locally 
+
+`mvn clean wildfly:deploy -Popenshift`
+
+3. then access
+
+`http://localhost:8080/hub/search?caseNumber=any`
+
+as <any> is not a known case number, you should receive the following:
+```xml
+<soap:Envelope>
+  <soap:Body>
+    <SearchByCaseNumberResponse/>
+  </soap:Body>
+</soap:Envelope>
 ```
-
-This will run the container in the foreground with STDIN open and place you into root/karaf.
-
