@@ -3,6 +3,7 @@ package hub;
 import com.sun.net.httpserver.HttpServer;
 import hub.http.PingServlet;
 import hub.http.SearchServlet;
+import hub.support.HttpResponse;
 import hub.support.HttpTest;
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.util.stream.Collectors;
 
+import static hub.support.GetRequest.get;
 import static hub.support.Resource.bodyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -46,7 +48,9 @@ public class Form7NotFoundTest extends HttpTest {
         context.addServlet(SearchServlet.class, "/search");
         server.start();
 
-        assertThat(bodyOf("http://localhost:8888/search?caseNumber=unknown"),
-                equalTo("NOT FOUND"));
+        HttpResponse response = get("http://localhost:8888/search?caseNumber=unknown");
+
+        assertThat(response.getBody(), equalTo("NOT FOUND"));
+        assertThat(response.getStatusCode(), equalTo(404));
     }
 }

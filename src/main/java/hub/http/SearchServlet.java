@@ -34,7 +34,7 @@ public class SearchServlet extends HttpServlet {
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
 
-        if ("not-found".equalsIgnoreCase(result)) {
+        if ("NOT FOUND".equalsIgnoreCase(result)) {
             res.setHeader("content-type", "text/plain");
             res.setStatus(404);
         }
