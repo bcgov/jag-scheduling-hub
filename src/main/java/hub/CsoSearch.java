@@ -1,38 +1,40 @@
 package hub;
 
+import hub.helper.Environment;
+
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.soap.*;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static hub.helper.Environment.getValue;
 
 @Named
 public class CsoSearch {
 
+    @Inject
+    Environment environment;
+
     public String user() {
-        return getValue("COA_USER");
+        return environment.getValue("COA_USER");
     }
 
     public String password() {
-        return getValue("COA_PASSWORD");
+        return environment.getValue("COA_PASSWORD");
     }
 
     public String searchEndpoint() {
-        return getValue("COA_SEARCH_ENDPOINT");
+        return environment.getValue("COA_SEARCH_ENDPOINT");
     }
 
     public String namespace() {
-        return getValue("COA_NAMESPACE");
+        return environment.getValue("COA_NAMESPACE");
     }
 
     public String searchByCaseNumberSoapAction() {
-        return getValue("COA_SEARCH_SOAP_ACTION");
+        return environment.getValue("COA_SEARCH_SOAP_ACTION");
     }
 
     public String viewCasePartySoapAction() {
-        return getValue("COA_VIEW_CASE_PARTY_SOAP_ACTION");
+        return environment.getValue("COA_VIEW_CASE_PARTY_SOAP_ACTION");
     }
 
     public String basicAuthorization() {

@@ -1,6 +1,7 @@
 package hub.camel;
 
 import hub.CsoSearch;
+import hub.helper.Stringify;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.cdi.ContextName;
@@ -13,7 +14,6 @@ import javax.inject.Inject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static hub.helper.SOAPMessageToString.stringify;
 
 @ApplicationScoped
 @Startup
@@ -22,6 +22,9 @@ public class SearchRouteBuilder extends RouteBuilder {
 
     @Inject
     CsoSearch csoSearch;
+
+    @Inject
+    Stringify stringify;
 
     private final static Logger LOGGER = Logger.getLogger(SearchRouteBuilder.class.getName());
 
@@ -37,7 +40,7 @@ public class SearchRouteBuilder extends RouteBuilder {
                 .process(exchange -> {
                     String caseNumber = exchange.getIn().getBody(String.class);
                     LOGGER.log(Level.INFO, "caseNumber="+caseNumber);
-                    String message = stringify(csoSearch.searchByCaseNumber(caseNumber));
+                    String message = stringify.soapMessage(csoSearch.searchByCaseNumber(caseNumber));
                     LOGGER.log(Level.INFO, "message="+message);
                     exchange.getOut().setBody(message);
                 })
@@ -59,7 +62,7 @@ public class SearchRouteBuilder extends RouteBuilder {
                             String caseId = csoSearch.extractCaseId(exchange.getIn().getBody(String.class));
                             LOGGER.log(Level.INFO, "caseId="+caseId);
 
-                            exchange.getOut().setBody(stringify(csoSearch.viewCaseParty(caseId)));
+                            exchange.getOut().setBody(stringify.soapMessage(csoSearch.viewCaseParty(caseId)));
                         })
                         .setHeader(Exchange.HTTP_METHOD, constant("POST"))
                         .setHeader(Exchange.CONTENT_TYPE, constant("text/xml"))
