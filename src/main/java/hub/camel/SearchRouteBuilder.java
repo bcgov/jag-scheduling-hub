@@ -36,6 +36,10 @@ public class SearchRouteBuilder extends RouteBuilder {
         xmlJsonFormat.setTrimSpaces(true);
 
         from("direct:search")
+                .onException(Exception.class)
+                    .handled(true)
+                    .transform(constant("SERVICE UNAVAILABLE"))
+                .end()
                 .process(exchange -> LOGGER.log(Level.INFO, "first call..."))
                 .process(exchange -> {
                     String caseNumber = exchange.getIn().getBody(String.class);

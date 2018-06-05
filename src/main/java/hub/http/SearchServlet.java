@@ -38,6 +38,10 @@ public class SearchServlet extends HttpServlet {
             res.setHeader("content-type", "text/plain");
             res.setStatus(404);
         }
+        if ("SERVICE UNAVAILABLE".equalsIgnoreCase(result)) {
+            res.setHeader("content-type", "text/plain");
+            res.setStatus(503);
+        }
     }
 
 }
