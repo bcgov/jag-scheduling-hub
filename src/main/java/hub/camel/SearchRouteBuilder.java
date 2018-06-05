@@ -38,7 +38,7 @@ public class SearchRouteBuilder extends RouteBuilder {
         from("direct:search")
                 .onException(Exception.class)
                     .handled(true)
-                    .transform(constant("SERVICE UNAVAILABLE"))
+                    .setBody(constant("SERVICE UNAVAILABLE"))
                 .end()
                 .process(exchange -> LOGGER.log(Level.INFO, "first call..."))
                 .process(exchange -> {
