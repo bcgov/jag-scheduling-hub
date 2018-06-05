@@ -28,12 +28,12 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         ProducerTemplate producer = context.createProducerTemplate();
         String result = producer.requestBody("direct:search", req.getParameter("caseNumber"), String.class);
-        LOGGER.log(Level.INFO, result);
 
-        res.setHeader("content-type", "application/json");
+        LOGGER.log(Level.INFO, result);
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
 
+        res.setHeader("content-type", "application/json");
         if ("NOT FOUND".equalsIgnoreCase(result)) {
             res.setHeader("content-type", "text/plain");
             res.setStatus(404);
