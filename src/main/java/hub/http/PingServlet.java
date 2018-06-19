@@ -1,11 +1,11 @@
 package hub.http;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.CamelExecutionException;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.cdi.ContextName;
 
 import javax.inject.Inject;
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,15 +22,21 @@ public class PingServlet extends HttpServlet {
     @ContextName("cdi-context")
     private CamelContext context;
 
-    private final static Logger LOGGER = Logger.getLogger(PingServlet.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(PingServlet.class.getName());
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        ProducerTemplate producer = context.createProducerTemplate();
-        String result = producer.requestBody("direct:ping", null, String.class);
-        LOGGER.log(Level.INFO, result);
-
-        ServletOutputStream out = res.getOutputStream();
-        out.print(result);
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) {
+        try {
+            ProducerTemplate producer = context.createProducerTemplate();
+            String result = producer.requestBody("direct:ping", null, String.class);
+            LOGGER.log(Level.INFO, result);
+            ServletOutputStream out = res.getOutputStream();
+            out.print(result);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage());
+        }
+        catch (CamelExecutionException camelException) {
+            LOGGER.log(Level.SEVERE, camelException.getMessage());
+        }
     }
 }

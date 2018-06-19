@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 @Named
 public class Environment {
 
-    private final static Logger LOGGER = Logger.getLogger(CsoSearch.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CsoSearch.class.getName());
 
     public String getValue(String key) {
         LOGGER.log(Level.INFO, "env.{0}={1}", new Object[] {key, System.getenv(key)});

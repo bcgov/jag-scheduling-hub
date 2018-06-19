@@ -26,7 +26,7 @@ public class SearchRouteBuilder extends RouteBuilder {
     @Inject
     Stringify stringify;
 
-    private final static Logger LOGGER = Logger.getLogger(SearchRouteBuilder.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SearchRouteBuilder.class.getName());
 
     @Override
     public void configure() {
