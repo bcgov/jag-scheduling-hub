@@ -42,7 +42,7 @@ public class CsoSearch {
                 (this.user() + ":" + this.password()).getBytes());
     }
 
-    public SOAPMessage searchByCaseNumber(String caseNumber) throws Exception {
+    public SOAPMessage searchByCaseNumber(String caseNumber) throws SOAPException {
         MessageFactory myMsgFct = MessageFactory.newInstance();
         SOAPMessage message = myMsgFct.createMessage();
         SOAPPart mySPart = message.getSOAPPart();
@@ -58,7 +58,7 @@ public class CsoSearch {
         return message;
     }
 
-    public SOAPMessage viewCaseParty(String caseId) throws Exception {
+    public SOAPMessage viewCaseParty(String caseId) throws SOAPException {
         MessageFactory myMsgFct = MessageFactory.newInstance();
         SOAPMessage message = myMsgFct.createMessage();
         SOAPPart mySPart = message.getSOAPPart();
