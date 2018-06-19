@@ -2,7 +2,7 @@ package hub;
 
 import com.sun.net.httpserver.HttpServer;
 import hub.http.SearchServlet;
-import hub.support.HttpTest;
+import hub.support.HavingHubRunning;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +10,10 @@ import org.junit.Test;
 import java.net.InetSocketAddress;
 
 import static hub.support.Resource.bodyOf;
-import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class Form7SearchTest extends HttpTest {
+public class Form7SearchTest extends HavingHubRunning {
 
     private HttpServer cso;
 

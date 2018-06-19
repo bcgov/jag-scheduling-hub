@@ -2,7 +2,7 @@ package hub;
 
 import hub.http.SearchServlet;
 import hub.support.HttpResponse;
-import hub.support.HttpTest;
+import hub.support.HavingHubRunning;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +10,7 @@ import static hub.support.GetRequest.get;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ResistServerIsDownTest extends HttpTest {
+public class ResistServerIsDownTest extends HavingHubRunning {
 
     @Before
     public void setProperties() {

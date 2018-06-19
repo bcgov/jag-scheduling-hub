@@ -5,7 +5,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.junit.After;
 import org.junit.Before;
 
-public class HttpTest {
+public class HavingHubRunning {
 
     protected Server server;
     protected ServletContextHandler context;

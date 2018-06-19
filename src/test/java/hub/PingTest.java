@@ -1,7 +1,7 @@
 package hub;
 
 import hub.http.PingServlet;
-import hub.support.HttpTest;
+import hub.support.HavingHubRunning;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import static hub.support.Resource.bodyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class PingTest extends HttpTest {
+public class PingTest extends HavingHubRunning {
 
     @Before
     public void setCommitHash() {

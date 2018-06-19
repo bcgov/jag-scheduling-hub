@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static org.apache.http.HttpHeaders.CONTENT_TYPE;
+
 @WebServlet(name = "SearchServlet", urlPatterns = {"/form7s"}, loadOnStartup = 1)
 public class SearchServlet extends HttpServlet {
 
@@ -33,13 +35,13 @@ public class SearchServlet extends HttpServlet {
         ServletOutputStream out = res.getOutputStream();
         out.print(result);
 
-        res.setHeader("content-type", "application/json");
+        res.setHeader(CONTENT_TYPE, "application/json");
         if ("NOT FOUND".equalsIgnoreCase(result)) {
-            res.setHeader("content-type", "text/plain");
+            res.setHeader(CONTENT_TYPE, "text/plain");
             res.setStatus(404);
         }
         if ("SERVICE UNAVAILABLE".equalsIgnoreCase(result)) {
-            res.setHeader("content-type", "text/plain");
+            res.setHeader(CONTENT_TYPE, "text/plain");
             res.setStatus(503);
         }
     }
