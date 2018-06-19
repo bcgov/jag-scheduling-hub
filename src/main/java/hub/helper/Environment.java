@@ -12,8 +12,8 @@ public class Environment {
     private final static Logger LOGGER = Logger.getLogger(CsoSearch.class.getName());
 
     public String getValue(String key) {
-        LOGGER.log(Level.INFO, "env."+key+"=" + System.getenv(key));
-        LOGGER.log(Level.INFO, "properties."+key+"=" + System.getProperty(key));
+        LOGGER.log(Level.INFO, "env.{0}={1}", new Object[] {key, System.getenv(key)});
+        LOGGER.log(Level.INFO, "properties.{0}={1}", new Object[] {key, System.getProperty(key)});
 
         String value = System.getProperty(key);
         return value != null ? value : System.getenv(key);
