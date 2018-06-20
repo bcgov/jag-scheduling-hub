@@ -5,7 +5,7 @@ import hub.helper.Stringify;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.cdi.ContextName;
-import org.apache.camel.model.dataformat.XmlJsonDataFormat;
+import org.apache.camel.dataformat.xmljson.XmlJsonDataFormat;
 
 import javax.ejb.Startup;
 import javax.enterprise.context.ApplicationScoped;
