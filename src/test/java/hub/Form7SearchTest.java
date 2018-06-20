@@ -1,14 +1,18 @@
 package hub;
 
 import com.sun.net.httpserver.HttpServer;
+import hub.http.PingServlet;
 import hub.http.SearchServlet;
 import hub.support.HavingHubRunning;
+import hub.support.HttpResponse;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.net.InetSocketAddress;
 
+import static hub.support.GetRequest.get;
 import static hub.support.Resource.bodyOf;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -50,5 +54,16 @@ public class Form7SearchTest extends HavingHubRunning {
 
         assertThat(bodyOf("http://localhost:8888/search?caseNumber=unknown"),
                 equalTo("{\"anything\":{\"that-will-be\":\"jsonified\"}}"));
+    }
+
+    @Test
+    public void resistsInternalErrors() throws Exception {
+        SearchServlet searchServlet = new SearchServlet();
+        context.addServlet(new ServletHolder(searchServlet), "/search");
+        server.start();
+
+        HttpResponse response = get("http://localhost:8888/search?caseNumber=unknown");
+        assertThat(response.getStatusCode(), equalTo(500));
+        assertThat(response.getBody(), equalTo(""));
     }
 }
