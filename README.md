@@ -1,5 +1,14 @@
 [![Build Status](https://travis-ci.org/bcgov/jag-efiling-hub.svg?branch=master)](https://travis-ci.org/bcgov/jag-efiling-hub)
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling-hub&metric=coverage)](https://sonarcloud.io/dashboard?id=jag-efiling-hub)
+
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling-hub&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jag-efiling-hub)
+
+[![Duplication](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling-hub&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jag-efiling-hub)
+
+[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling-hub&metric=code_smells)](https://sonarcloud.io/dashboard?id=jag-efiling-hub)
+
+
 To run locally:
 1. start wildfly with the following env variables or system properties set
 
