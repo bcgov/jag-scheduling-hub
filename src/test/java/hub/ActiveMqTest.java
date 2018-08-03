@@ -4,6 +4,7 @@ import hub.http.ActiveMqServlet;
 import hub.support.AsyncHttpResponse;
 import hub.support.HavingHubRunning;
 import hub.support.ThirdParty;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,8 +15,7 @@ public class ActiveMqTest extends HavingHubRunning {
 
     @Test
     public void allowsToPublishOneMessage() throws Exception {
-        context.setInitParameter("org.apache.activemq.brokerURL", "vm://localhost");
-        context.addServlet(ActiveMqServlet.class, "/message/*");
+        context.addServlet(new ServletHolder(new ActiveMqServlet()), "/message/*");
         server.start();
 
         AsyncHttpResponse client = asyncGet("http://localhost:8888/message/this-queue?type=queue");
