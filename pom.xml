@@ -15,6 +15,7 @@
 
         <jetty-version>9.4.8.v20171121</jetty-version>
         <camel-version>2.21.0</camel-version>
+        <activemq-version>5.15.4</activemq-version>
     </properties>
     
     <dependencies>
@@ -54,6 +55,12 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-client</artifactId>
+            <version>${jetty-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
             <version>${jetty-version}</version>
             <scope>test</scope>
@@ -69,6 +76,17 @@
             <artifactId>weld-servlet-shaded</artifactId>
             <version>3.0.4.Final</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-all</artifactId>
+            <version>${activemq-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-web</artifactId>
+            <version>${activemq-version}</version>
         </dependency>
     </dependencies>
 
