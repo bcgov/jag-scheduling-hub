@@ -42,6 +42,7 @@ public class ActiveMqServletWithUndertowTest {
     }
 
     @Test
+    @Ignore
     public void allowsToReadTheQueueTwice() throws Exception {
         ThirdParty.post("http://localhost:8080/message/this-queue?type=queue", "body=hello");
 
