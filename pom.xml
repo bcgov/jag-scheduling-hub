@@ -16,6 +16,7 @@
         <jetty-version>9.3.12.v20160915</jetty-version>
         <camel-version>2.21.0</camel-version>
         <activemq-version>5.15.4</activemq-version>
+        <undertow-version>2.0.11.Final</undertow-version>
     </properties>
     
     <dependencies>
@@ -93,6 +94,17 @@
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-util</artifactId>
             <version>${jetty-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-core</artifactId>
+            <version>${undertow-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.undertow</groupId>
+            <artifactId>undertow-servlet</artifactId>
+            <version>${undertow-version}</version>
         </dependency>
 
     </dependencies>

@@ -11,7 +11,7 @@ import org.junit.Test;
 import static hub.support.AsyncGetRequest.asyncGet;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-public class ActiveMqTest extends HavingHubRunning {
+public class ActiveMqServletWithJettyTest extends HavingHubRunning {
 
     @Test
     public void allowsToPublishOneMessage() throws Exception {
