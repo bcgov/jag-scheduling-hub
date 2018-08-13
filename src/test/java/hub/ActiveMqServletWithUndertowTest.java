@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ActiveMqServletWithUndertowTest {
 
     private static Undertow server;
+    private static int port = 8080;
 
     @BeforeClass
     public static void startServer() throws ServletException {
@@ -37,7 +38,7 @@ public class ActiveMqServletWithUndertowTest {
         manager.deploy();
         HttpHandler servletHandler = manager.start();
         server = Undertow.builder()
-                .addHttpListener(8080, "localhost")
+                .addHttpListener(port, "localhost")
                 .setHandler(servletHandler)
                 .build();
         server.start();
@@ -48,27 +49,28 @@ public class ActiveMqServletWithUndertowTest {
     }
 
     @Test
-    public void exposesQueueForRead() throws Exception {
-        ThirdParty.post("http://localhost:8080/message/hello-queue?type=queue", "body=hello");
-        HttpResponse response = get("http://localhost:8080/message/hello-queue?type=queue");
-        
-        assertThat(response.getStatusCode(), equalTo(200));
-        assertThat(response.getBody(), equalTo("hello"));
+    public void publishMessageWithPost() throws Exception {
+        AsyncHttpResponse client = asyncGet("http://localhost:"+port+"/message/this-queue");
+        ThirdParty.post("http://localhost:8080/message/this-queue", "body=welcome");
+
+        Assert.assertThat(client.getBody(), equalTo("welcome"));
     }
 
     @Test
     public void returnsNoContentAfterTimeoutWhenQueueIsEmpty() throws Exception {
-        HttpResponse response = get("http://localhost:8080/message/empty-queue?type=queue");
+        HttpResponse response = get("http://localhost:"+port+"/message/empty-queue");
 
         assertThat(response.getStatusCode(), equalTo(204));
         assertThat(response.getBody(), equalTo(""));
     }
 
     @Test
-    public void readCanWaitForNewMessage() throws Exception {
-        AsyncHttpResponse client = asyncGet("http://localhost:8080/message/this-queue?type=queue");
-        ThirdParty.post("http://localhost:8080/message/this-queue?type=queue", "body=welcome");
+    public void severalClientsCanListenToOneTopic() throws Exception {
+        AsyncHttpResponse client1 = asyncGet("http://localhost:"+port+"/message/this-queue");
+        AsyncHttpResponse client2 = asyncGet("http://localhost:"+port+"/message/this-queue");
+        ThirdParty.post("http://localhost:8080/message/this-queue", "body=welcome");
 
-        Assert.assertThat(client.getBody(), equalTo("welcome"));
+        Assert.assertThat(client1.getBody(), equalTo("welcome"));
+        Assert.assertThat(client2.getBody(), equalTo("welcome"));
     }
 }
