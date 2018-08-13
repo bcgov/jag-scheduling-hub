@@ -8,10 +8,7 @@ import io.undertow.Undertow;
 import io.undertow.server.HttpHandler;
 import io.undertow.servlet.api.DeploymentInfo;
 import io.undertow.servlet.api.DeploymentManager;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import javax.servlet.ServletException;
 
@@ -24,7 +21,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ActiveMqServletWithUndertowTest {
 
     private static Undertow server;
-    private static int port = 8080;
+    private static int port = 8889;
+    private String url = "http://localhost:" + port + "/message/this-topic";
 
     @BeforeClass
     public static void startServer() throws ServletException {
@@ -50,25 +48,26 @@ public class ActiveMqServletWithUndertowTest {
 
     @Test
     public void publishMessageWithPost() throws Exception {
-        AsyncHttpResponse client = asyncGet("http://localhost:"+port+"/message/this-queue");
-        ThirdParty.post("http://localhost:8080/message/this-queue", "body=welcome");
+        AsyncHttpResponse client = asyncGet(url);
+        ThirdParty.post(url, "body=hi");
 
-        Assert.assertThat(client.getBody(), equalTo("welcome"));
+        Assert.assertThat(client.getBody(), equalTo("hi"));
     }
 
     @Test
     public void returnsNoContentAfterTimeoutWhenQueueIsEmpty() throws Exception {
-        HttpResponse response = get("http://localhost:"+port+"/message/empty-queue");
+        HttpResponse response = get(url);
 
         assertThat(response.getStatusCode(), equalTo(204));
         assertThat(response.getBody(), equalTo(""));
     }
 
     @Test
+    @Ignore
     public void severalClientsCanListenToOneTopic() throws Exception {
-        AsyncHttpResponse client1 = asyncGet("http://localhost:"+port+"/message/this-queue");
-        AsyncHttpResponse client2 = asyncGet("http://localhost:"+port+"/message/this-queue");
-        ThirdParty.post("http://localhost:8080/message/this-queue", "body=welcome");
+        AsyncHttpResponse client1 = asyncGet(url);
+        AsyncHttpResponse client2 = asyncGet(url);
+        ThirdParty.post(url, "body=welcome");
 
         Assert.assertThat(client1.getBody(), equalTo("welcome"));
         Assert.assertThat(client2.getBody(), equalTo("welcome"));
