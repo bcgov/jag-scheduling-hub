@@ -14,20 +14,21 @@ import javax.servlet.ServletException;
 
 import static hub.support.AsyncGetRequest.asyncGet;
 import static hub.support.GetRequest.get;
+import static hub.support.Resource.bodyOf;
 import static io.undertow.servlet.Servlets.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ActiveMqServletWithUndertowTest {
+public class ActiveMqQueueWithUndertowTest {
 
     private static Undertow server;
-    private static int port = 8889;
-    private String url = "http://localhost:" + port + "/message/this-topic";
+    private static int port = 8080;
+    private String url = "http://localhost:" + port + "/message/tuesday?type=queue";
 
     @BeforeClass
     public static void startServer() throws ServletException {
         DeploymentInfo servletBuilder = deployment()
-                .setClassLoader(ActiveMqServletWithUndertowTest.class.getClassLoader())
+                .setClassLoader(ActiveMqQueueWithUndertowTest.class.getClassLoader())
                 .setContextPath("")
                 .setDeploymentName("test.war")
                 .addServlets(servlet("ActiveMqServlet", ActiveMqServlet.class)
@@ -48,28 +49,8 @@ public class ActiveMqServletWithUndertowTest {
 
     @Test
     public void publishMessageWithPost() throws Exception {
-        AsyncHttpResponse client = asyncGet(url);
         ThirdParty.post(url, "body=hi");
 
-        Assert.assertThat(client.getBody(), equalTo("hi"));
-    }
-
-    @Test
-    public void returnsNoContentAfterTimeoutWhenQueueIsEmpty() throws Exception {
-        HttpResponse response = get(url);
-
-        assertThat(response.getStatusCode(), equalTo(204));
-        assertThat(response.getBody(), equalTo(""));
-    }
-
-    @Test
-    @Ignore
-    public void severalClientsCanListenToOneTopic() throws Exception {
-        AsyncHttpResponse client1 = asyncGet(url);
-        AsyncHttpResponse client2 = asyncGet(url);
-        ThirdParty.post(url, "body=welcome");
-
-        Assert.assertThat(client1.getBody(), equalTo("welcome"));
-        Assert.assertThat(client2.getBody(), equalTo("welcome"));
+        assertThat(bodyOf(url), equalTo("hi"));
     }
 }

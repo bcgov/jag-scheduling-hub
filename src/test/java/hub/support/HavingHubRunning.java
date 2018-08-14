@@ -9,10 +9,11 @@ public class HavingHubRunning {
 
     protected Server server;
     protected ServletContextHandler context;
+    protected int port = 8888;
 
     @Before
     public void startHub() throws Exception {
-        server = new Server(8888);
+        server = new Server(port);
         context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
         context.setResourceBase("src/main/resources");
