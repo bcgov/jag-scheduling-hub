@@ -3,3 +3,6 @@ target
 *.iml
 .scannerwork
 activemq-data
+.settings
+.classpath
+.project
