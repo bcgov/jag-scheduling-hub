@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/bcgov/jag-scheduling-hub.svg?branch=master)](https://travis-ci.org/bcgov/jag-scheduling-hub)
 
-<!-- [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling%3Ahub&metric=coverage)](https://sonarcloud.io/dashboard?id=jag-efiling%3Ahub)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jag-scheduling%3Ahub&metric=coverage)](https://sonarcloud.io/dashboard?id=jag-scheduling%3Ahub)
 
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling%3Ahub&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jag-efiling%3Ahub)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jag-scheduling%3Ahub&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jag-scheduling%3Ahub)
 
-[![Duplication](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling%3Ahub&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jag-efiling%3Ahub)
+[![Duplication](https://sonarcloud.io/api/project_badges/measure?project=jag-scheduling%3Ahub&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jag-scheduling%3Ahub)
 
-[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=jag-efiling%3Ahub&metric=code_smells)](https://sonarcloud.io/dashboard?id=jag-efiling%3Ahub) -->
+[![Code smells](https://sonarcloud.io/api/project_badges/measure?project=jag-scheduling%3Ahub&metric=code_smells)](https://sonarcloud.io/dashboard?id=jag-scheduling%3Ahub)
 
 
 To run locally:
